@@ -13,8 +13,26 @@ Library Size just ~ 18 KB.
 
 # Download
 
-> soon
+**add this line to** `build.gradle`
 
+```gradle
+
+dependencies {
+    implementation 'com.github.anastr:rulerview:1.0.0'
+}
+
+```
+
+for **maven**
+
+```maven
+<dependency>
+  <groupId>com.github.anastr</groupId>
+  <artifactId>rulerview</artifactId>
+  <version>1.0.0</version>
+  <type>pom</type>
+</dependency>
+```
 
 # Simple Usage
 add RulerView to your `Layout.xml`.<br>
@@ -42,6 +60,8 @@ rulerView.unit = RulerUnit.IN // in inch
 ```
 
 ### Calibration
+
+<img src="images/RulerCalibrationView.png" width="70%" />
 
 in android devices, convert pixels to (MM, IN...) is not always accurate.<br/>
 you need your users help to calibration RulerView for there devices, that's why you should use `RulerCalibrationView` to do that.
