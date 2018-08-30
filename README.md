@@ -28,7 +28,8 @@ add RulerView to your `Layout.xml`.<br>
 ```
 
 and that's it!!
-<img src="images/RulerView.gif" width="49%" />
+
+<img src="images/RulerView.gif" width="70%" />
 
 you can get the length in _millimeter_ simply By
 ```kotlin
@@ -42,9 +43,9 @@ rulerView.unit = RulerUnit.IN // in inch
 
 ### Calibration
 
-in android devices, convert pixels to (MM, IN...) is not always accurate.
-
+in android devices, convert pixels to (MM, IN...) is not always accurate.<br/>
 you need your users help to calibration RulerView for there devices, that's why you should use `RulerCalibrationView` to do that.
+
 <img src="images/RulerCalibrationView.gif" width="70%" />
 
 the user can easily slide to match real measurements.
