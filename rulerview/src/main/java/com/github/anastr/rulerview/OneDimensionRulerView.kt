@@ -20,6 +20,8 @@ class OneDimensionRulerView : View {
     }
 
     private val colorPaintMask = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val grayPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val grayPaintReplace: Paint
     private val textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
     private val textPaintReplace: TextPaint
 
@@ -27,6 +29,22 @@ class OneDimensionRulerView : View {
     private var lowerY : Float = 1f
 
     private val minDistance = dpTOpx(10f)
+
+    var markCmWidth = dpTOpx(20f)
+        set(value) {
+            field = value
+            invalidate()
+        }
+    var markHalfCmWidth = dpTOpx(15f)
+        set(value) {
+            field = value
+            invalidate()
+        }
+    var markMmWidth = dpTOpx(10f)
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     private var currentSection = 0
     private var pointerY = 0f
@@ -52,6 +70,11 @@ class OneDimensionRulerView : View {
     init {
         colorPaintMask.xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
 
+        grayPaint.color = Color.DKGRAY
+        grayPaintReplace = Paint(grayPaint)
+        grayPaintReplace.color = Color.WHITE
+        grayPaintReplace.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OVER)
+
         textPaint.textSize = dpTOpx(25f)
         textPaint.color = context.resources.getColor(R.color.colorAccent)
         textPaint.textAlign = Paint.Align.CENTER
@@ -70,14 +93,34 @@ class OneDimensionRulerView : View {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
+        drawMarks(canvas, grayPaint)
+
         canvas?.drawText(unit.getUnitString(RulerUnit.pxToIn(Math.abs(upperY - lowerY), coefficient, resources.displayMetrics))
                 , width*.5f, textPaint.textSize + 5, textPaint)
 
         canvas?.drawRect(0f, 0f, width.toFloat(), upperY, colorPaintMask)
         canvas?.drawRect(0f, lowerY, width.toFloat(), height.toFloat(), colorPaintMask)
 
+        drawMarks(canvas, grayPaintReplace)
+
         canvas?.drawText(unit.getUnitString(RulerUnit.pxToIn(Math.abs(upperY - lowerY), coefficient, resources.displayMetrics))
                 , width*.5f, textPaint.textSize + 5, textPaintReplace)
+    }
+
+    private fun drawMarks(canvas: Canvas?, paint: Paint) {
+        val oneMmInPx = RulerUnit.mmToPx(1f, coefficient, resources.displayMetrics)
+        for(i in 1..1000) {
+            val y = oneMmInPx * i
+            val markWidth = when {
+                i%10 == 0 -> markCmWidth
+                i%5 == 0 -> markHalfCmWidth
+                else -> markMmWidth
+            }
+            canvas?.drawLine(0f, y, markWidth, y, paint)
+            canvas?.drawLine(width.toFloat(), y, width - markWidth, y, paint)
+            if (y >= height)
+                break
+        }
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
