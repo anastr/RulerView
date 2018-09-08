@@ -18,7 +18,7 @@ Library Size just ~ 18 KB.
 ```gradle
 
 dependencies {
-    implementation 'com.github.anastr:rulerview:1.0.0'
+    implementation 'com.github.anastr:rulerview:1.1.0'
 }
 
 ```
@@ -29,7 +29,7 @@ for **maven**
 <dependency>
   <groupId>com.github.anastr</groupId>
   <artifactId>rulerview</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -114,7 +114,6 @@ val distance = oneDimensionRulerView.getDistance()
 * add control on marks color
 * text color
 * text size
-* add marks to OneDimensionRulerView
 * new TwoDimensionRulerView
 
 # LICENSE
