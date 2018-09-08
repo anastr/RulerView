@@ -1,0 +1,9 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.github.anastr.rulerview.CalibrationPreference
+        android:key="ruler_coefficient"
+        android:negativeButtonText="@null"
+        android:title="Calibration"
+        android:summary="Calibration ruler to real measurement and save the value to pass it to other ruler views" />
+
+</PreferenceScreen>
