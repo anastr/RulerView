@@ -22,8 +22,6 @@ class RulerView : View {
 
     private var rulerX = 0f
 
-    private val minDistance = dpTOpx(10f)
-
     var markCmWidth = dpTOpx(20f)
         set(value) {
             field = value
